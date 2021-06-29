@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
-import 'package:riverpod/riverpod.dart';
-
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:material_floating_search_bar/material_floating_search_bar.dart';
 import '../../environment_config.dart';
 import 'movie.dart';
 

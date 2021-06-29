@@ -1,0 +1,22 @@
+{
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "dart_movies",
+      "request": "launch",
+      "type": "dart",
+      "args": [
+        "--dart-define=movieApiKey=ae884f3a647dcb51820850d70c0f3681"
+      ],
+    }
+    {
+      "name": "dart_movies (profile mode)",
+      "request": "launch",
+      "type": "dart",
+      "flutterMode": "profile"
+    }
+  ]
+}

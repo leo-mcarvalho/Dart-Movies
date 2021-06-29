@@ -1,20 +1,14 @@
-import 'package:dart_movies/splash/splash_page.dart';
+import 'package:dart_movies/app_widget.dart';
 import 'package:flutter/material.dart';
-
-import 'themes/app_colors.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 void main() {
-  runApp(AppWidget());
+  runApp(ProviderScope(child: AppMain()));
 }
 
-class AppWidget extends StatelessWidget {
+class AppMain extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Dart Movies',
-      theme: ThemeData(primaryColor: AppColors.background),
-      home: SplashPage(),
-    );
+    return AppWidget();
   }
 }
