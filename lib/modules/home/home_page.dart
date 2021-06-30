@@ -1,60 +1,20 @@
 import 'dart:ui';
-
-import 'package:dart_movies/modules/movies/movie_image.dart';
-import 'package:dart_movies/themes/app_colors.dart';
+import 'package:dart_movies/modules/movies/movie.dart';
+import 'package:dart_movies/modules/movies/movies_service.dart';
+import 'package:dart_movies/modules/movies/popular_movies.dart';
 import 'package:dart_movies/themes/app_images.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
-import 'package:dart_movies/modules/movies/movie.dart';
-import 'package:dart_movies/modules/movies/movies_service.dart';
 import 'package:material_floating_search_bar/material_floating_search_bar.dart';
 
-final moviesFutureProvider =
-    FutureProvider.autoDispose<List<Movie>>((ref) async {
-  ref.maintainState = true;
-
-  final movieService = ref.watch(movieServiceProvider);
-  final movies = await movieService.getMovies();
-  return movies;
-});
-
 class HomePage extends ConsumerWidget {
-  get backgroundColor => null;
-
   @override
   Widget build(BuildContext context, ScopedReader watch) {
+    final args = ModalRoute.of(context)!.settings.arguments;
     return Scaffold(
       body: Stack(
         children: [
-          Container(
-            color: AppColors.grey,
-            child: watch(moviesFutureProvider).when(
-              error: (e, s) {
-                return Text("Oops, Algo inesperado ocorreu");
-              },
-              loading: () => Center(child: CircularProgressIndicator()),
-              data: (movies) {
-                return RefreshIndicator(
-                  onRefresh: () {
-                    return context.refresh(moviesFutureProvider);
-                  },
-                  child: Padding(
-                    padding: const EdgeInsets.only(left: 6, right: 6, top: 120),
-                    child: GridView.extent(
-                      maxCrossAxisExtent: 200,
-                      crossAxisSpacing: 6,
-                      mainAxisSpacing: 6,
-                      childAspectRatio: 0.7,
-                      children: movies
-                          .map((movie) => MovieImage(movie: movie))
-                          .toList(),
-                    ),
-                  ),
-                );
-              },
-            ),
-          ),
+          PopularMovies(),
           Positioned(
             left: 10,
             right: 200,
@@ -93,7 +53,6 @@ class HomePage extends ConsumerWidget {
 
 Widget searchBarUI(context) {
   final isPortrait = MediaQuery.of(context).orientation == Orientation.portrait;
-
   return FloatingSearchBar(
     hint: 'Pesquisar...',
     scrollPadding: const EdgeInsets.only(top: 16, bottom: 56),
@@ -103,10 +62,19 @@ Widget searchBarUI(context) {
     axisAlignment: isPortrait ? 1 : -1.0,
     openAxisAlignment: 0.0,
     width: isPortrait ? 340 : 500,
-    debounceDelay: const Duration(milliseconds: 500),
-    onQueryChanged: (query) {
-      // Call your model, bloc, controller here.
+    onSubmitted: (query) async {
+      final moviesFutureProvider =
+          FutureProvider.autoDispose<List<Movie>>((ref) async {
+        ref.maintainState = true;
+        final movieService = ref.watch(movieServiceProvider);
+        final movies = movieService.getMoviesFromQuery(query);
+        print(movies);
+        return movies;
+      });
+      Navigator.pushReplacementNamed(context, "/query",
+          arguments: moviesFutureProvider);
     },
+
     // Specify a custom transition to be used for
     // animating between opened and closed stated.
     transition: CircularFloatingSearchBarTransition(),
@@ -130,9 +98,6 @@ Widget searchBarUI(context) {
           elevation: 0,
           child: Column(
             mainAxisSize: MainAxisSize.min,
-            children: Colors.accents.map((color) {
-              return Container(height: 112, color: color);
-            }).toList(),
           ),
         ),
       );

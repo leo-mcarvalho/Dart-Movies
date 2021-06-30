@@ -1,5 +1,6 @@
 import 'package:dart_movies/modules/movies/movie.dart';
 import 'package:dart_movies/modules/movies/movie_overview_page.dart';
+import 'package:dart_movies/modules/query_result/query_result_page.dart';
 import 'package:flutter/material.dart';
 
 import 'modules/home/home_page.dart';
@@ -18,6 +19,7 @@ class AppWidget extends StatelessWidget {
         "/splash": (context) => SplashPage(),
         "/home": (context) => HomePage(),
         "/overview": (context) => MovieOverviewPage(),
+        "/query": (context) => QueryResultPage(),
       },
     );
   }

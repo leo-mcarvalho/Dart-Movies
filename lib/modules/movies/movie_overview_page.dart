@@ -1,16 +1,16 @@
+import 'package:dart_movies/themes/app_images.dart';
 import 'package:flutter/material.dart';
-
-import 'package:dart_movies/modules/home/home_page.dart';
-import 'package:dart_movies/modules/movies/movie_image.dart';
 import 'package:dart_movies/themes/app_colors.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
 import 'movie.dart';
 
 class MovieOverviewPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, ScopedReader watch) {
     final args = ModalRoute.of(context)!.settings.arguments as Movie;
+    String? overview = args.overview;
+    String? releaseDate = args.release_date;
+    String? backdropPath = args.backdrop_path;
     return Scaffold(
         backgroundColor: AppColors.grey,
         appBar: PreferredSize(
@@ -31,7 +31,9 @@ class MovieOverviewPage extends ConsumerWidget {
                 child: Container(
                   decoration: BoxDecoration(
                     image: DecorationImage(
-                        image: NetworkImage(args.fullBackdropUrl),
+                        image: backdropPath != null
+                            ? NetworkImage(args.fullBackdropUrl)
+                            : NetworkImage("https://i.imgur.com/pjEVaz5.jpeg"),
                         fit: BoxFit.fill),
                     // child: Image.network(
                     //   args.fullBackdropUrl,
@@ -52,9 +54,13 @@ class MovieOverviewPage extends ConsumerWidget {
                         children: <Widget>[
                           Text(args.title),
                           Text('Sinopse'.toUpperCase()),
-                          Text(args.overview),
+                          Text(overview == null
+                              ? "Não temos esse dado sobre este título"
+                              : overview),
                           Text('Data de Lançamento'.toUpperCase()),
-                          Text(args.release_date.toString()),
+                          Text(releaseDate == null
+                              ? "Não temos esse dado sobre este título"
+                              : releaseDate),
                         ],
                       ),
                     ),

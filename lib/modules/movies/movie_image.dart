@@ -1,4 +1,4 @@
-import 'package:dart_movies/modules/movies/movie_overview_page.dart';
+import 'package:dart_movies/themes/app_images.dart';
 import 'package:flutter/material.dart';
 
 import 'movie.dart';
@@ -12,23 +12,47 @@ class MovieImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        ClipRRect(
-          borderRadius: BorderRadius.all(Radius.circular(10)),
-          child: Image.network(
-            movie.fullImageUrl,
-            fit: BoxFit.cover,
-            width: double.infinity,
+    if (movie.poster_path == null) {
+      return Stack(
+        children: [
+          ClipRRect(
+            borderRadius: BorderRadius.all(Radius.circular(10)),
+            child: Image.asset(
+              AppImages.posterUnknown,
+              fit: BoxFit.cover,
+              width: double.infinity,
+            ),
           ),
-        ),
-        InkWell(
-          onTap: () {
-            Navigator.pushReplacementNamed(context, "/overview",
-                arguments: movie);
-          },
-        )
-      ],
-    );
+          Center(
+            child: Text(movie.title),
+          ),
+          InkWell(
+            onTap: () {
+              Navigator.pushReplacementNamed(context, "/overview",
+                  arguments: movie);
+            },
+          )
+        ],
+      );
+    } else {
+      return Stack(
+        children: [
+          ClipRRect(
+            borderRadius: BorderRadius.all(Radius.circular(10)),
+            child: Image.network(
+              movie.fullImageUrl,
+              fit: BoxFit.cover,
+              width: double.infinity,
+            ),
+          ),
+          InkWell(
+            onTap: () {
+              Navigator.pushReplacementNamed(context, "/overview",
+                  arguments: movie);
+            },
+          )
+        ],
+      );
+    }
   }
 }

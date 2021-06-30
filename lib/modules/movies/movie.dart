@@ -2,17 +2,17 @@ import 'dart:convert';
 
 class Movie {
   final String title;
-  final String poster_path;
-  final String overview;
+  final String? poster_path;
+  final String? overview;
   final String? release_date;
   final String? backdrop_path;
 
   Movie({
     required this.title,
-    required this.poster_path,
-    required this.overview,
-    required this.release_date,
-    required this.backdrop_path,
+    this.poster_path,
+    this.overview,
+    this.release_date,
+    this.backdrop_path,
   });
   String get fullImageUrl => 'https://image.tmdb.org/t/p/w200$poster_path';
   String get fullBackdropUrl =>
