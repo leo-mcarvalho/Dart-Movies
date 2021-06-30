@@ -1,26 +1,46 @@
 import 'dart:ui';
 
 import 'package:dart_movies/modules/movies/movies_from_query.dart';
-import 'package:dart_movies/modules/movies/popular_movies.dart';
 import 'package:dart_movies/themes/app_images.dart';
+import 'package:dart_movies/themes/app_text_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class QueryResultPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, ScopedReader watch) {
+    final isPortrait =
+        MediaQuery.of(context).orientation == Orientation.portrait;
     final args = ModalRoute.of(context)!.settings.arguments;
     return Scaffold(
         body: Stack(children: [
       MoviesFromQuery(),
       Positioned(
-        left: 10,
-        right: 200,
-        top: 90,
-        child: Text(
-          "Resultados da pesquisa",
+        top: 30,
+        child: BackButton(
+          color: Colors.white,
+          onPressed: () => Navigator.pushReplacementNamed(context, "/home"),
         ),
       ),
+      isPortrait
+          ? Positioned(
+              left: 80,
+              right: 0,
+              top: 90,
+              child: Text(
+                "Resultados da pesquisa",
+                style: TextStyles.titleBoldHeading,
+              ),
+            )
+          : Positioned(
+              left: 300,
+              right: 0,
+              top: 90,
+              child: Text(
+                "Resultados da pesquisa",
+                style: TextStyles.titleBoldHeading,
+              ),
+            ),
       Positioned(
         left: 10,
         right: 0,

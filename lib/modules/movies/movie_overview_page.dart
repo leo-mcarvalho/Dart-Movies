@@ -1,21 +1,31 @@
-import 'package:dart_movies/themes/app_images.dart';
+import 'package:dart_movies/themes/app_text_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:dart_movies/themes/app_colors.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:intl/intl.dart';
 import 'movie.dart';
 
 class MovieOverviewPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, ScopedReader watch) {
+    final size = MediaQuery.of(context).size;
+    final isPortrait =
+        MediaQuery.of(context).orientation == Orientation.portrait;
     final args = ModalRoute.of(context)!.settings.arguments as Movie;
     String? overview = args.overview;
     String? releaseDate = args.release_date;
     String? backdropPath = args.backdrop_path;
+    String? voteAverage = args.vote_average;
+    String? voteCount = args.vote_count;
+    DateTime? data;
+    if (releaseDate != null) {
+      data = DateTime.parse(releaseDate);
+    }
     return Scaffold(
         backgroundColor: AppColors.grey,
         appBar: PreferredSize(
           //preferredSize: Size.fromHeight(MediaQuery.of(context).size.height / 2),
-          preferredSize: Size.fromHeight(350),
+          preferredSize: Size.fromHeight(size.height * 0.35),
           child: AppBar(
               backgroundColor: AppColors.grey,
               elevation: 0,
@@ -33,7 +43,7 @@ class MovieOverviewPage extends ConsumerWidget {
                     image: DecorationImage(
                         image: backdropPath != null
                             ? NetworkImage(args.fullBackdropUrl)
-                            : NetworkImage("https://i.imgur.com/pjEVaz5.jpeg"),
+                            : NetworkImage("https://i.imgur.com/Td2lqn5.jpg"),
                         fit: BoxFit.fill),
                     // child: Image.network(
                     //   args.fullBackdropUrl,
@@ -52,15 +62,67 @@ class MovieOverviewPage extends ConsumerWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          Text(args.title),
-                          Text('Sinopse'.toUpperCase()),
-                          Text(overview == null
-                              ? "Não temos esse dado sobre este título"
-                              : overview),
-                          Text('Data de Lançamento'.toUpperCase()),
-                          Text(releaseDate == null
-                              ? "Não temos esse dado sobre este título"
-                              : releaseDate),
+                          Center(
+                            child: Text(
+                              args.title,
+                              style: TextStyles.titleHome,
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 10),
+                            child: Text(
+                              'Sinopse'.toUpperCase(),
+                              style: TextStyles.bodytitle,
+                            ),
+                          ),
+                          Text(
+                              overview == null
+                                  ? "Não temos esse dado sobre este título"
+                                  : overview,
+                              style: TextStyles.bodyRegular),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 10),
+                            child: Text('Data de Lançamento'.toUpperCase(),
+                                style: TextStyles.bodytitle),
+                          ),
+                          Text(
+                              releaseDate == null
+                                  ? "Não temos esse dado sobre este título"
+                                  : DateFormat("dd/MM/yyyy").format(data!),
+                              style: TextStyles.bodyRegular),
+                          Padding(
+                            padding: const EdgeInsets.only(top: 25),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Icon(Icons.star, color: AppColors.primary),
+                                Padding(
+                                  padding: const EdgeInsets.only(left: 5),
+                                  child: voteAverage == null
+                                      ? Text("0.0/10")
+                                      : Text("$voteAverage/10",
+                                          style: TextStyles.rating),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Center(
+                            child: voteCount == null
+                                ? Text(
+                                    "Esse título ainda não possui avaliações")
+                                : Text.rich(
+                                    TextSpan(
+                                        text: "Nota baseada em ",
+                                        style: TextStyles.bodytitle,
+                                        children: [
+                                          TextSpan(
+                                            text: "$voteCount votos",
+                                            style: TextStyles.bodyBold,
+                                          )
+                                        ]),
+                                  ),
+                          ),
                         ],
                       ),
                     ),

@@ -12,7 +12,6 @@ class PopularMovies extends ConsumerWidget {
     ref.maintainState = true;
     final movieService = ref.watch(movieServiceProvider);
     final movies = await movieService.getMovies();
-    print(movies);
     return movies;
   });
 

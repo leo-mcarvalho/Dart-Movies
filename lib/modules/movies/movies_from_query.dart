@@ -11,8 +11,6 @@ class MoviesFromQuery extends ConsumerWidget {
   Widget build(BuildContext context, ScopedReader watch) {
     final moviesFutureProvider = ModalRoute.of(context)!.settings.arguments
         as AutoDisposeFutureProvider<List<Movie>>;
-    print("moviesFutureProvider");
-    print(moviesFutureProvider);
     return Container(
       color: AppColors.grey,
       child: watch(moviesFutureProvider).when(

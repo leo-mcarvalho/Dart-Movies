@@ -28,26 +28,12 @@ class MovieService {
   }
 
   Future<List<Movie>> getMoviesFromQuery(String movieQuery) async {
-    debugPrint("inside" + movieQuery);
     final response = await _dio.get(
         "https://api.themoviedb.org/3/search/movie?api_key=${_environmentConfig.movieApiKey}&query=${movieQuery}&language=pt-BR&page=1&include_adult=false&page=1");
     final results = List<Map<String, dynamic>>.from(response.data['results']);
-    print(results);
-    print("----");
     List<Movie> movies = results
         .map((movieData) => Movie.fromMap(movieData))
         .toList(growable: false);
-    print(movies);
     return movies;
   }
 }
-
-// Future<List<Movie>> getMoviesFromQuery(movieQuery) async {
-//     final response = await _dio.get(
-//         "https://api.themoviedb.org/3/search/movie?api_key=${_environmentConfig.movieApiKey}&query=${movieQuery}&language=pt-BR&page=1&include_adult=false");
-//     final results = List<Map<String, dynamic>>.from(response.data['results']);
-//     List<Movie> moviesFromQuery = results
-//         .map((movieData) => Movie.fromMap(movieData))
-//         .toList(growable: false);
-//     return moviesFromQuery;
-//   }

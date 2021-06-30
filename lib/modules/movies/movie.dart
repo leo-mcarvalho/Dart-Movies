@@ -6,8 +6,12 @@ class Movie {
   final String? overview;
   final String? release_date;
   final String? backdrop_path;
+  final String? vote_average;
+  final String? vote_count;
 
   Movie({
+    this.vote_average,
+    this.vote_count,
     required this.title,
     this.poster_path,
     this.overview,
@@ -23,8 +27,10 @@ class Movie {
       'title': title,
       'poster_path': poster_path,
       'overview': overview,
-      'releaseDate': release_date,
+      'release_date': release_date,
       'backdrop_path': backdrop_path,
+      'vote_average': vote_average,
+      'vote_count': vote_count,
     };
   }
 
@@ -35,6 +41,8 @@ class Movie {
       overview: map['overview'],
       release_date: map['release_date'],
       backdrop_path: map['backdrop_path'],
+      vote_average: map['vote_average'].toString(),
+      vote_count: map['vote_count'].toString(),
     );
   }
 

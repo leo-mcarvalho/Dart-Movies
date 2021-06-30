@@ -3,6 +3,7 @@ import 'package:dart_movies/modules/movies/movie.dart';
 import 'package:dart_movies/modules/movies/movies_service.dart';
 import 'package:dart_movies/modules/movies/popular_movies.dart';
 import 'package:dart_movies/themes/app_images.dart';
+import 'package:dart_movies/themes/app_text_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:material_floating_search_bar/material_floating_search_bar.dart';
@@ -10,19 +11,33 @@ import 'package:material_floating_search_bar/material_floating_search_bar.dart';
 class HomePage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, ScopedReader watch) {
+    final isPortrait =
+        MediaQuery.of(context).orientation == Orientation.portrait;
+    final size = MediaQuery.of(context).size;
     final args = ModalRoute.of(context)!.settings.arguments;
     return Scaffold(
       body: Stack(
         children: [
           PopularMovies(),
-          Positioned(
-            left: 10,
-            right: 200,
-            top: 90,
-            child: Text(
-              "Filmes Populares",
-            ),
-          ),
+          isPortrait
+              ? Positioned(
+                  left: 125,
+                  right: 0,
+                  top: 90,
+                  child: Text(
+                    "Filmes Populares",
+                    style: TextStyles.titleBoldHeading,
+                  ),
+                )
+              : Positioned(
+                  left: 300,
+                  right: 0,
+                  top: 90,
+                  child: Text(
+                    "Filmes Populares",
+                    style: TextStyles.titleBoldHeading,
+                  ),
+                ),
           Positioned(
             left: 10,
             right: 0,
@@ -52,6 +67,7 @@ class HomePage extends ConsumerWidget {
 }
 
 Widget searchBarUI(context) {
+  final size = MediaQuery.of(context).size;
   final isPortrait = MediaQuery.of(context).orientation == Orientation.portrait;
   return FloatingSearchBar(
     hint: 'Pesquisar...',
@@ -59,16 +75,15 @@ Widget searchBarUI(context) {
     transitionDuration: const Duration(milliseconds: 800),
     transitionCurve: Curves.easeInOut,
     physics: const BouncingScrollPhysics(),
-    axisAlignment: isPortrait ? 1 : -1.0,
+    axisAlignment: isPortrait ? 1 : 1.0,
     openAxisAlignment: 0.0,
-    width: isPortrait ? 340 : 500,
+    width: isPortrait ? size.width * 0.83 : size.width * 0.91,
     onSubmitted: (query) async {
       final moviesFutureProvider =
           FutureProvider.autoDispose<List<Movie>>((ref) async {
         ref.maintainState = true;
         final movieService = ref.watch(movieServiceProvider);
         final movies = movieService.getMoviesFromQuery(query);
-        print(movies);
         return movies;
       });
       Navigator.pushReplacementNamed(context, "/query",
