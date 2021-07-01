@@ -9,14 +9,12 @@ class MovieOverviewPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, ScopedReader watch) {
     final size = MediaQuery.of(context).size;
-    final isPortrait =
-        MediaQuery.of(context).orientation == Orientation.portrait;
     final args = ModalRoute.of(context)!.settings.arguments as Movie;
     String overview = args.overview!;
-    String? releaseDate = args.release_date;
-    String? backdropPath = args.backdrop_path;
-    String? voteAverage = args.vote_average;
-    String? voteCount = args.vote_count;
+    String? releaseDate = args.releaseDate;
+    String? backdropPath = args.backdropPath;
+    String? voteAverage = args.voteAverage;
+    String? voteCount = args.voteCount;
     DateTime? data;
     if (releaseDate != null) {
       data = DateTime.parse(releaseDate);
@@ -106,7 +104,7 @@ class MovieOverviewPage extends ConsumerWidget {
                             ),
                           ),
                           Center(
-                            child: voteCount == 0
+                            child: voteCount == "0"
                                 ? Text(
                                     "Esse título ainda não possui avaliações")
                                 : Text.rich(

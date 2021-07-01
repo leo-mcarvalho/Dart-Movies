@@ -13,11 +13,11 @@ class MovieImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (movie.poster_path == null) {
+    if (movie.posterPath == null) {
       return Stack(
         children: [
           ClipRRect(
-            borderRadius: BorderRadius.all(Radius.circular(10)),
+            borderRadius: const BorderRadius.all(Radius.circular(10)),
             child: Image.asset(
               AppImages.posterUnknown,
               fit: BoxFit.cover,
@@ -37,7 +37,7 @@ class MovieImage extends StatelessWidget {
       return Stack(
         children: [
           ClipRRect(
-            borderRadius: BorderRadius.all(Radius.circular(10)),
+            borderRadius: const BorderRadius.all(Radius.circular(10)),
             child: Image.network(
               movie.fullImageUrl,
               fit: BoxFit.cover,

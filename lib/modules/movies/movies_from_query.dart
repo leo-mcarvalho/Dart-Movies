@@ -4,7 +4,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'movie.dart';
 import 'movie_image.dart';
-import 'movies_service.dart';
 
 class MoviesFromQuery extends ConsumerWidget {
   @override

@@ -1,6 +1,7 @@
 import 'package:dart_movies/modules/movies/movie_overview_page.dart';
 import 'package:dart_movies/modules/query_result/query_result_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
 import 'modules/home/home_page.dart';
@@ -8,6 +9,10 @@ import 'modules/splash/splash_page.dart';
 import 'themes/app_colors.dart';
 
 class AppWidget extends StatelessWidget {
+  AppWidget() {
+    SystemChrome.setPreferredOrientations(
+        [DeviceOrientation.portraitDown, DeviceOrientation.portraitUp]);
+  }
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -15,14 +20,14 @@ class AppWidget extends StatelessWidget {
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate
       ],
-      supportedLocales: [const Locale('pt', 'BR')],
+      supportedLocales: [Locale('pt', 'BR')],
       debugShowCheckedModeBanner: false,
       title: 'Dart Movies',
       theme: ThemeData(primaryColor: AppColors.primary),
       initialRoute: "/splash",
       routes: {
         "/splash": (context) => SplashPage(),
-        "/home": (context) => HomePage(),
+        "/home": (context) => const HomePage(),
         "/overview": (context) => MovieOverviewPage(),
         "/query": (context) => QueryResultPage(),
       },

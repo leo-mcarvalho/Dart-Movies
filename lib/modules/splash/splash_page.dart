@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 import 'splash_transition.dart';
 
+// ignore: use_key_in_widget_constructors
 class SplashPage extends StatelessWidget {
   final delay = SplashTransition();
   @override

@@ -6,6 +6,7 @@ import 'movie.dart';
 import 'movie_image.dart';
 import 'movies_service.dart';
 
+// ignore: use_key_in_widget_constructors
 class PopularMovies extends ConsumerWidget {
   final moviesFutureProvider =
       FutureProvider.autoDispose<List<Movie>>((ref) async {
