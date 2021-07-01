@@ -18,22 +18,32 @@ class MovieService {
   final EnvironmentConfig _environmentConfig;
 
   Future<List<Movie>> getMovies() async {
-    final response = await _dio.get(
-        "https://api.themoviedb.org/3/movie/popular?api_key=${_environmentConfig.movieApiKey}&language=pt-BR&page=1");
-    final results = List<Map<String, dynamic>>.from(response.data['results']);
-    List<Movie> movies = results
-        .map((movieData) => Movie.fromMap(movieData))
-        .toList(growable: false);
-    return movies;
+    try {
+      final response = await _dio.get(
+          "https://api.themoviedb.org/3/movie/popular?api_key=${_environmentConfig.movieApiKey}&language=pt-BR&page=1");
+      final results = List<Map<String, dynamic>>.from(response.data['results']);
+      List<Movie> movies = results
+          .map((movieData) => Movie.fromMap(movieData))
+          .toList(growable: false);
+      return movies;
+    } on DioError catch (e) {
+      print(e);
+      rethrow;
+    }
   }
 
   Future<List<Movie>> getMoviesFromQuery(String movieQuery) async {
-    final response = await _dio.get(
-        "https://api.themoviedb.org/3/search/movie?api_key=${_environmentConfig.movieApiKey}&query=${movieQuery}&language=pt-BR&page=1&include_adult=false&page=1");
-    final results = List<Map<String, dynamic>>.from(response.data['results']);
-    List<Movie> movies = results
-        .map((movieData) => Movie.fromMap(movieData))
-        .toList(growable: false);
-    return movies;
+    try {
+      final response = await _dio.get(
+          "https://api.themoviedb.org/3/search/movie?api_key=${_environmentConfig.movieApiKey}&query=${movieQuery}&language=pt-BR&page=1&include_adult=false&page=1");
+      final results = List<Map<String, dynamic>>.from(response.data['results']);
+      List<Movie> movies = results
+          .map((movieData) => Movie.fromMap(movieData))
+          .toList(growable: false);
+      return movies;
+    } on DioError catch (e) {
+      print(e);
+      rethrow;
+    }
   }
 }

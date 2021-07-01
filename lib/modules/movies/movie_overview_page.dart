@@ -12,7 +12,7 @@ class MovieOverviewPage extends ConsumerWidget {
     final isPortrait =
         MediaQuery.of(context).orientation == Orientation.portrait;
     final args = ModalRoute.of(context)!.settings.arguments as Movie;
-    String? overview = args.overview;
+    String overview = args.overview!;
     String? releaseDate = args.release_date;
     String? backdropPath = args.backdrop_path;
     String? voteAverage = args.vote_average;
@@ -76,7 +76,7 @@ class MovieOverviewPage extends ConsumerWidget {
                             ),
                           ),
                           Text(
-                              overview == null
+                              overview == ""
                                   ? "Não temos esse dado sobre este título"
                                   : overview,
                               style: TextStyles.bodyRegular),
@@ -99,16 +99,14 @@ class MovieOverviewPage extends ConsumerWidget {
                                 Icon(Icons.star, color: AppColors.primary),
                                 Padding(
                                   padding: const EdgeInsets.only(left: 5),
-                                  child: voteAverage == null
-                                      ? Text("0.0/10")
-                                      : Text("$voteAverage/10",
-                                          style: TextStyles.rating),
+                                  child: Text("$voteAverage/10",
+                                      style: TextStyles.rating),
                                 ),
                               ],
                             ),
                           ),
                           Center(
-                            child: voteCount == null
+                            child: voteCount == 0
                                 ? Text(
                                     "Esse título ainda não possui avaliações")
                                 : Text.rich(
