@@ -1,49 +1,23 @@
 import 'dart:ui';
-import 'package:dart_movies/modules/movies/movie.dart';
-import 'package:dart_movies/modules/movies/movies_service.dart';
 import 'package:dart_movies/modules/movies/popular_movies.dart';
-import 'package:dart_movies/modules/searchBarUI.dart';
+import 'package:dart_movies/modules/home/searchbar_ui.dart';
 import 'package:dart_movies/themes/app_images.dart';
 import 'package:dart_movies/themes/app_text_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:material_floating_search_bar/material_floating_search_bar.dart';
 
 class HomePage extends ConsumerWidget {
   const HomePage({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context, ScopedReader watch) {
-    final isPortrait =
-        MediaQuery.of(context).orientation == Orientation.portrait;
-    final size = MediaQuery.of(context).size;
-    final args = ModalRoute.of(context)!.settings.arguments;
     return Scaffold(
       body: Stack(
         children: [
           PopularMovies(),
-          isPortrait
-              ? Positioned(
-                  left: 125,
-                  right: 0,
-                  top: 90,
-                  child: Text(
-                    "Filmes Populares",
-                    style: TextStyles.titleBoldHeading,
-                  ),
-                )
-              : Positioned(
-                  left: 300,
-                  right: 0,
-                  top: 90,
-                  child: Text(
-                    "Filmes Populares",
-                    style: TextStyles.titleBoldHeading,
-                  ),
-                ),
           Positioned(
             left: 10,
             right: 0,
-            top: 30,
+            top: 32,
             child: Stack(children: <Widget>[
               Opacity(
                   child: Image.asset(AppImages.logoHome,
@@ -62,6 +36,19 @@ class HomePage extends ConsumerWidget {
             ]),
           ),
           searchBarUI(context),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(top: 90),
+                child: Text(
+                  "Filmes Populares",
+                  style: TextStyles.titleBoldHeading,
+                ),
+              ),
+            ],
+          ),
         ],
       ),
     );

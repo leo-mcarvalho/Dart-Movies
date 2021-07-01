@@ -1,3 +1,4 @@
+import 'package:animated_card/animated_card.dart';
 import 'package:dart_movies/themes/app_images.dart';
 import 'package:dart_movies/themes/app_text_styles.dart';
 import 'package:flutter/material.dart';
@@ -24,7 +25,15 @@ class MovieImage extends StatelessWidget {
               width: double.infinity,
             ),
           ),
-          Center(child: Text(movie.title, style: TextStyles.bodyRegular)),
+          Center(
+              child: Padding(
+            padding: const EdgeInsets.all(17),
+            child: Text(
+              movie.title,
+              style: TextStyles.bodyRegular,
+              textAlign: TextAlign.center,
+            ),
+          )),
           InkWell(
             onTap: () {
               Navigator.pushReplacementNamed(context, "/overview",

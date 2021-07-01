@@ -1,3 +1,4 @@
+import 'package:animated_card/animated_card.dart';
 import 'package:dart_movies/themes/app_colors.dart';
 import 'package:dart_movies/themes/app_images.dart';
 import 'package:flutter/material.dart';
@@ -14,8 +15,18 @@ class SplashPage extends StatelessWidget {
       backgroundColor: AppColors.grey,
       body: Stack(
         children: [
-          Center(child: Image.asset(AppImages.ball)),
-          Center(child: Image.asset(AppImages.logo)),
+          AnimatedCard(
+              duration: Duration(seconds: 2),
+              direction: AnimatedCardDirection.left,
+              initDelay: Duration(milliseconds: 0),
+              curve: Curves.easeInOutCubic,
+              child: Center(child: Image.asset(AppImages.ball))),
+          AnimatedCard(
+              duration: Duration(seconds: 2),
+              direction: AnimatedCardDirection.right,
+              initDelay: Duration(milliseconds: 300),
+              curve: Curves.easeInOutCubic,
+              child: Center(child: Image.asset(AppImages.logo))),
         ],
       ),
     );

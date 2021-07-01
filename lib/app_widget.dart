@@ -9,6 +9,7 @@ import 'modules/splash/splash_page.dart';
 import 'themes/app_colors.dart';
 
 class AppWidget extends StatelessWidget {
+  // ignore: use_key_in_widget_constructors
   AppWidget() {
     SystemChrome.setPreferredOrientations(
         [DeviceOrientation.portraitDown, DeviceOrientation.portraitUp]);

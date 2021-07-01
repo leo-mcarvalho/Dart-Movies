@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:material_floating_search_bar/material_floating_search_bar.dart';
 
-import 'movies/movie.dart';
-import 'movies/movies_service.dart';
+import '../movies/movie.dart';
+import '../movies/movies_service.dart';
 
 Widget searchBarUI(context) {
   final size = MediaQuery.of(context).size;

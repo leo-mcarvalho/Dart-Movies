@@ -1,3 +1,4 @@
+import 'package:animated_card/animated_card.dart';
 import 'package:dart_movies/themes/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -32,13 +33,19 @@ class PopularMovies extends ConsumerWidget {
             },
             child: Padding(
               padding: const EdgeInsets.only(left: 6, right: 6, top: 120),
-              child: GridView.extent(
-                maxCrossAxisExtent: 200,
-                crossAxisSpacing: 6,
-                mainAxisSpacing: 6,
-                childAspectRatio: 0.7,
-                children:
-                    movies.map((movie) => MovieImage(movie: movie)).toList(),
+              child: AnimatedCard(
+                duration: Duration(seconds: 2),
+                initDelay: Duration(milliseconds: 0),
+                direction: AnimatedCardDirection.bottom,
+                curve: Curves.easeInOutCubic,
+                child: GridView.extent(
+                  maxCrossAxisExtent: 200,
+                  crossAxisSpacing: 6,
+                  mainAxisSpacing: 6,
+                  childAspectRatio: 0.7,
+                  children:
+                      movies.map((movie) => MovieImage(movie: movie)).toList(),
+                ),
               ),
             ),
           );
