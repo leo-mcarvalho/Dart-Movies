@@ -1,4 +1,3 @@
-import 'package:animated_card/animated_card.dart';
 import 'package:dart_movies/themes/app_images.dart';
 import 'package:dart_movies/themes/app_text_styles.dart';
 import 'package:flutter/material.dart';

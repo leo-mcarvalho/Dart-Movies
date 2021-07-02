@@ -56,76 +56,88 @@ class MovieOverviewPage extends ConsumerWidget {
               ),
             )),
       ),
-      body: Container(
-          child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 12, vertical: 12),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Center(
-              child: Text(
-                args.title,
-                style: TextStyles.titleHome,
-                textAlign: TextAlign.center,
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 10),
-              child: Text(
-                'Sinopse'.toUpperCase(),
-                style: TextStyles.bodytitle,
-              ),
-            ),
-            Text(
-                overview == ""
-                    ? "Não temos esse dado sobre este título"
-                    : overview,
-                style: TextStyles.bodyRegular),
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 10),
-              child: Text('Data de Lançamento'.toUpperCase(),
-                  style: TextStyles.bodytitle),
-            ),
-            Text(
-                releaseDate == null
-                    ? "Não temos esse dado sobre este título"
-                    : DateFormat("dd/MM/yyyy").format(data!),
-                style: TextStyles.bodyRegular),
-            Padding(
-              padding: const EdgeInsets.only(top: 25),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Icon(Icons.star, color: AppColors.primary),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 5),
-                    child: Text("$voteAverage/10", style: TextStyles.rating),
-                  ),
-                ],
-              ),
-            ),
-            Center(
-              child: voteCount == "0"
-                  ? Text(
-                      "Esse título ainda não possui avaliações",
-                      style: TextStyles.bodyBold,
-                    )
-                  : Text.rich(
-                      TextSpan(
-                          text: "Nota baseada em ",
-                          style: TextStyles.bodytitle,
-                          children: [
-                            TextSpan(
-                              text: "$voteCount votos",
+      body: SingleChildScrollView(
+        child: AnimatedCard(
+          initDelay: Duration(milliseconds: 300),
+          duration: Duration(seconds: 2),
+          direction: AnimatedCardDirection.bottom,
+          curve: Curves.decelerate,
+          child: Column(
+            children: [
+              Padding(
+                padding: EdgeInsets.all(12),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Center(
+                      child: Text(
+                        args.title,
+                        style: TextStyles.titleHome,
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 10),
+                      child: Text(
+                        'Sinopse'.toUpperCase(),
+                        style: TextStyles.bodytitle,
+                      ),
+                    ),
+                    Text(
+                        overview == ""
+                            ? "Não temos esse dado sobre este título"
+                            : overview,
+                        style: TextStyles.bodyRegular),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 10),
+                      child: Text('Data de Lançamento'.toUpperCase(),
+                          style: TextStyles.bodytitle),
+                    ),
+                    Text(
+                        releaseDate == null
+                            ? "Não temos esse dado sobre este título"
+                            : DateFormat("dd/MM/yyyy").format(data!),
+                        style: TextStyles.bodyRegular),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 25),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Icon(Icons.star, color: AppColors.primary),
+                          Padding(
+                            padding: const EdgeInsets.only(left: 5),
+                            child: Text("$voteAverage/10",
+                                style: TextStyles.rating),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Center(
+                      child: voteCount == "0"
+                          ? Text(
+                              "Esse título ainda não possui avaliações",
                               style: TextStyles.bodyBold,
                             )
-                          ]),
+                          : Text.rich(
+                              TextSpan(
+                                  text: "Nota baseada em ",
+                                  style: TextStyles.bodytitle,
+                                  children: [
+                                    TextSpan(
+                                      text: "$voteCount votos",
+                                      style: TextStyles.bodyBold,
+                                    )
+                                  ]),
+                            ),
                     ),
-            ),
-          ],
+                  ],
+                ),
+              ),
+            ],
+          ),
         ),
-      )),
+      ),
     );
   }
 }

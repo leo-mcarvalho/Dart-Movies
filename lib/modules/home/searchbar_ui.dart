@@ -9,9 +9,8 @@ Widget searchBarUI(context) {
   final size = MediaQuery.of(context).size;
   return FloatingSearchBar(
     hint: 'Pesquisar...',
-    scrollPadding: const EdgeInsets.only(top: 16, bottom: 56),
-    transitionDuration: const Duration(milliseconds: 800),
-    transitionCurve: Curves.easeInOut,
+    transitionDuration: const Duration(milliseconds: 600),
+    transitionCurve: Curves.easeInOutCubic,
     physics: const BouncingScrollPhysics(),
     axisAlignment: 1,
     openAxisAlignment: 0.0,
@@ -49,9 +48,6 @@ Widget searchBarUI(context) {
         child: Material(
           color: Colors.white,
           elevation: 0,
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-          ),
         ),
       );
     },

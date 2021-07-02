@@ -28,7 +28,7 @@ class AppWidget extends StatelessWidget {
       initialRoute: "/splash",
       routes: {
         "/splash": (context) => SplashPage(),
-        "/home": (context) => const HomePage(),
+        "/home": (context) => HomePage(),
         "/overview": (context) => MovieOverviewPage(),
         "/query": (context) => QueryResultPage(),
       },
