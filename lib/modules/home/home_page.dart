@@ -22,7 +22,7 @@ class HomePage extends ConsumerWidget {
           children: [
             PopularMovies(),
             Padding(
-              padding: const EdgeInsets.only(top: 30, left: 4),
+              padding: const EdgeInsets.only(top: 30, left: 6),
               child: Container(
                 alignment: Alignment.topLeft,
                 height: logoSizeHeight,
