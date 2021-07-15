@@ -20,7 +20,7 @@ class PopularMovies extends ConsumerWidget {
   @override
   Widget build(BuildContext context, ScopedReader watch) {
     return Container(
-      color: AppColors.grey,
+      color: Colors.transparent,
       child: watch(moviesFutureProvider).when(
         error: (e, s) {
           return Text("Oops, Algo inesperado ocorreu");
@@ -32,7 +32,7 @@ class PopularMovies extends ConsumerWidget {
               return context.refresh(moviesFutureProvider);
             },
             child: Padding(
-              padding: const EdgeInsets.only(left: 6, right: 6, top: 120),
+              padding: const EdgeInsets.only(left: 6, right: 6, top: 155),
               child: AnimatedCard(
                 duration: Duration(seconds: 2),
                 initDelay: Duration(milliseconds: 0),

@@ -41,6 +41,9 @@ class MovieOverviewPage extends ConsumerWidget {
                 duration: Duration(seconds: 2),
                 direction: AnimatedCardDirection.top,
                 curve: Curves.decelerate,
+                //
+                //backdrop do filme
+                //
                 child: Container(
                   decoration: BoxDecoration(
                     image: DecorationImage(
@@ -65,10 +68,11 @@ class MovieOverviewPage extends ConsumerWidget {
           child: Column(
             children: [
               Padding(
-                padding: EdgeInsets.all(12),
+                padding: EdgeInsets.all(15),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
+                    //titulo do filme
                     Center(
                       child: Text(
                         args.title,
@@ -76,6 +80,9 @@ class MovieOverviewPage extends ConsumerWidget {
                         textAlign: TextAlign.center,
                       ),
                     ),
+                    //
+                    //Sinopse do filme
+                    //
                     Padding(
                       padding: const EdgeInsets.symmetric(vertical: 10),
                       child: Text(
@@ -88,6 +95,9 @@ class MovieOverviewPage extends ConsumerWidget {
                             ? "Não temos esse dado sobre este título"
                             : overview,
                         style: TextStyles.bodyRegular),
+                    //
+                    //Data de lançamento do filme
+                    //
                     Padding(
                       padding: const EdgeInsets.symmetric(vertical: 10),
                       child: Text('Data de Lançamento'.toUpperCase(),
@@ -98,6 +108,9 @@ class MovieOverviewPage extends ConsumerWidget {
                             ? "Não temos esse dado sobre este título"
                             : DateFormat("dd/MM/yyyy").format(data!),
                         style: TextStyles.bodyRegular),
+                    //
+                    //Média de votos do filme
+                    //
                     Padding(
                       padding: const EdgeInsets.only(top: 25),
                       child: Row(
@@ -113,6 +126,9 @@ class MovieOverviewPage extends ConsumerWidget {
                         ],
                       ),
                     ),
+                    //
+                    //Número total de votos do filme
+                    //
                     Center(
                       child: voteCount == "0"
                           ? Text(

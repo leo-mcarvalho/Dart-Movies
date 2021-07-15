@@ -34,4 +34,14 @@ class TextStyles {
     fontWeight: FontWeight.w600,
     color: AppColors.heading,
   );
+  static final titlePrimary = GoogleFonts.lexendDeca(
+    fontSize: 20,
+    fontWeight: FontWeight.w600,
+    color: AppColors.primary,
+  );
+  static final titlePages = GoogleFonts.lexendDeca(
+    fontSize: 20,
+    fontWeight: FontWeight.w600,
+    color: AppColors.primary,
+  );
 }

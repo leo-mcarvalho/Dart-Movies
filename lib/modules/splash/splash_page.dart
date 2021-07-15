@@ -7,9 +7,10 @@ import 'splash_transition.dart';
 
 // ignore: use_key_in_widget_constructors
 class SplashPage extends StatelessWidget {
-  final delay = SplashTransition();
+  const SplashPage({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
+    final delay = SplashTransition();
     delay.aguarde(context);
     return Scaffold(
       backgroundColor: AppColors.grey,

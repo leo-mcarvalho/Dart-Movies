@@ -12,7 +12,7 @@ class MoviesFromQuery extends ConsumerWidget {
     final moviesFutureProvider = ModalRoute.of(context)!.settings.arguments
         as AutoDisposeFutureProvider<List<Movie>>;
     return Container(
-      color: AppColors.grey,
+      color: Colors.transparent,
       child: watch(moviesFutureProvider).when(
         error: (e, s) {
           return Text("Oops, Algo inesperado ocorreu");
@@ -24,7 +24,7 @@ class MoviesFromQuery extends ConsumerWidget {
               return context.refresh(moviesFutureProvider);
             },
             child: Padding(
-              padding: const EdgeInsets.only(left: 6, right: 6, top: 120),
+              padding: const EdgeInsets.only(left: 6, right: 6, top: 130),
               child: AnimatedCard(
                 duration: Duration(seconds: 2),
                 initDelay: Duration(milliseconds: 0),
